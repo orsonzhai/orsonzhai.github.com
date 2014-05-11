@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Open the world: history of nerd programmers - Dream Eyes</title>
+  <title>Make bootable SD card for OpenBoard Pegasus v4 - Dream Eyes</title>
   <meta name="author" content="Orson Zhai">
 
   
-  <meta name="description" content="About me When someone asks me about my job, I always tell them I am a programmer not &#8220;software engineer&#8221; or &#8220;developer&#8221;.
-Most &hellip;">
+  <meta name="description" content="Openboard - Pegasus PCB has been released for 2 months. I am working hard to boot it up with Niuboot and Linux.
+Now it is well done and I am glad to &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@ Most &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://orsonzhai.github.com/blog/2013/03/21/open-the-world-history-of-nerd-programmers">
+  <link rel="canonical" href="http://orsonzhai.github.com/blog/2014/05/11/make-bootable-sd-card-for-openboard-pegasus-v4">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Dream Eyes" type="application/atom+xml">
@@ -69,7 +69,7 @@ Most &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Open the World: History of Nerd Programmers</h1>
+      <h1 class="entry-title">Make Bootable SD Card for OpenBoard Pegasus V4</h1>
     
     
       <p class="meta">
@@ -85,7 +85,7 @@ Most &hellip;">
   
 
 
-<time datetime="2013-03-21T16:50:00+08:00" pubdate data-updated="true">Mar 21<span>st</span>, 2013</time>
+<time datetime="2014-05-11T17:03:00+08:00" pubdate data-updated="true">May 11<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -94,11 +94,49 @@ Most &hellip;">
   </header>
 
 
-<div class="entry-content"><h2>About me</h2>
+<div class="entry-content"><p>Openboard - Pegasus PCB has been released for 2 months. I am working hard to boot it up with Niuboot and Linux.
+Now it is well done and I am glad to show you the steps here how to make a SD card to boot your openboard.</p>
 
-<p>When someone asks me about my job, I always tell them I am a programmer not &#8220;software engineer&#8221; or &#8220;developer&#8221;.
-Most of them think I am a nerd who is writing code every day and night.
-((当有人问我是什么职业的时候，我经常回答他们我是一个程序员))</p>
+<h2>Step 1: Prepare Your Hardware</h2>
+
+<ol>
+<li><p><em>A Micro-SD card</em> (formal name TF card) less than 2G if your board is mounted with  MX233CAG4B.
+Or any capacity of card if MX233CAG4C.</p></li>
+<li><p><em>A SD card reader</em> normally comes with a USB port. Or a SD card converter suit (micro to normal size) if your notebook computer has a SD/MMC card socket.</p></li>
+</ol>
+
+
+<p>For further debug, you also need following devices.</p>
+
+<ol>
+<li>A USB-Serial converter wire.</li>
+</ol>
+
+
+<p>Note that openboard only support CMOS (3.3V) signal with its Debug UART port.
+FYR, I use a cp1202 as the converter.</p>
+
+<ol>
+<li>And of course, an openboard of h/w ver. pegasus.</li>
+</ol>
+
+
+<h2>Step 2: Make partition on your sd card</h2>
+
+<ul>
+<li>Insert your sd card into your desktop computer or notebook.</li>
+</ul>
+
+
+<p>Normally you will find some new device node appears in your /dev directory.
+They have different name base on your sd reader types, such as /dev/sdb, /dev/mmc0p1.</p>
+
+<ol>
+<li><p>Switch to root or use sudo in debian/ubuntu.</p>
+
+<p> sudo fdisk /dev/sdb</p></li>
+</ol>
+
 
 <p><a href="http://orsonzhai.github.com">my github host</a></p>
 
@@ -125,7 +163,7 @@ Most of them think I am a nerd who is writing code every day and night.
   
 
 
-<time datetime="2013-03-21T16:50:00+08:00" pubdate data-updated="true">Mar 21<span>st</span>, 2013</time>
+<time datetime="2014-05-11T17:03:00+08:00" pubdate data-updated="true">May 11<span>th</span>, 2014</time>
       
 
 
@@ -140,8 +178,8 @@ Most of them think I am a nerd who is writing code every day and night.
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/2013/03/21/open-the-world-history-of-nerd-programmers/" title="Previous Post: Open the world: history of nerd programmers">&laquo; Open the world: history of nerd programmers</a>
       
-        <a class="basic-alignment right" href="/blog/2014/05/11/make-bootable-sd-card-for-openboard-pegasus-v4/" title="Next Post: Make bootable SD card for OpenBoard Pegasus v4">Make bootable SD card for OpenBoard Pegasus v4 &raquo;</a>
       
     </p>
   </footer>
@@ -195,8 +233,8 @@ Most of them think I am a nerd who is writing code every day and night.
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://orsonzhai.github.com/blog/2013/03/21/open-the-world-history-of-nerd-programmers/';
-        var disqus_url = 'http://orsonzhai.github.com/blog/2013/03/21/open-the-world-history-of-nerd-programmers/';
+        var disqus_identifier = 'http://orsonzhai.github.com/blog/2014/05/11/make-bootable-sd-card-for-openboard-pegasus-v4/';
+        var disqus_url = 'http://orsonzhai.github.com/blog/2014/05/11/make-bootable-sd-card-for-openboard-pegasus-v4/';
         var disqus_script = 'embed.js';
       
     (function () {

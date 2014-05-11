@@ -9,8 +9,8 @@
   <meta name="author" content="Orson Zhai">
 
   
-  <meta name="description" content="About me When someone asks me about my job, I always tell them I am a programmer not &#8220;software engineer&#8221; or &#8220;developer&#8221;.
-Most &hellip;">
+  <meta name="description" content="Openboard - Pegasus PCB has been released for 2 months. I am working hard to boot it up with Niuboot and Linux.
+Now it is well done and I am glad to &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -72,6 +72,90 @@ Most &hellip;">
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2014/05/11/make-bootable-sd-card-for-openboard-pegasus-v4/">Make Bootable SD Card for OpenBoard Pegasus V4</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-11T17:03:00+08:00" pubdate data-updated="true">May 11<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/05/11/make-bootable-sd-card-for-openboard-pegasus-v4/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Openboard - Pegasus PCB has been released for 2 months. I am working hard to boot it up with Niuboot and Linux.
+Now it is well done and I am glad to show you the steps here how to make a SD card to boot your openboard.</p>
+
+<h2>Step 1: Prepare Your Hardware</h2>
+
+<ol>
+<li><p><em>A Micro-SD card</em> (formal name TF card) less than 2G if your board is mounted with  MX233CAG4B.
+Or any capacity of card if MX233CAG4C.</p></li>
+<li><p><em>A SD card reader</em> normally comes with a USB port. Or a SD card converter suit (micro to normal size) if your notebook computer has a SD/MMC card socket.</p></li>
+</ol>
+
+
+<p>For further debug, you also need following devices.</p>
+
+<ol>
+<li>A USB-Serial converter wire.</li>
+</ol>
+
+
+<p>Note that openboard only support CMOS (3.3V) signal with its Debug UART port.
+FYR, I use a cp1202 as the converter.</p>
+
+<ol>
+<li>And of course, an openboard of h/w ver. pegasus.</li>
+</ol>
+
+
+<h2>Step 2: Make partition on your sd card</h2>
+
+<ul>
+<li>Insert your sd card into your desktop computer or notebook.</li>
+</ul>
+
+
+<p>Normally you will find some new device node appears in your /dev directory.
+They have different name base on your sd reader types, such as /dev/sdb, /dev/mmc0p1.</p>
+
+<ol>
+<li><p>Switch to root or use sudo in debian/ubuntu.</p>
+
+<p> sudo fdisk /dev/sdb</p></li>
+</ol>
+
+
+<p><a href="http://orsonzhai.github.com">my github host</a></p>
+
+<p><img src="/images/tree-bear.jpg" alt="anythin" /></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/03/21/open-the-world-history-of-nerd-programmers/">Open the World: History of Nerd Programmers</a></h1>
     
     
@@ -126,6 +210,10 @@ Most of them think I am a nerd who is writing code every day and night.
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/05/11/make-bootable-sd-card-for-openboard-pegasus-v4/">Make bootable SD card for OpenBoard Pegasus v4</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/03/21/open-the-world-history-of-nerd-programmers/">Open the world: history of nerd programmers</a>
       </li>
     
@@ -167,16 +255,6 @@ Most of them think I am a nerd who is writing code every day and night.
 
 
 
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
 
 
 
