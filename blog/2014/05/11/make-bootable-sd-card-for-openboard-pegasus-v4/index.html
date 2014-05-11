@@ -94,31 +94,32 @@ Now it is well done and I am glad to &hellip;">
   </header>
 
 
-<div class="entry-content"><p>Openboard - Pegasus PCB has been released for 2 months. I am working hard to boot it up with Niuboot and Linux.
+<div class="entry-content"><p>Openboard - Pegasus PCB has been released for 2 months. I am working hard to boot it up with <a href="https://github.com/openbrd/niuboot">Niuboot</a> and Linux.
 Now it is well done and I am glad to show you the steps here how to make a SD card to boot your openboard.</p>
 
 <h2>Step 1: Prepare Your Hardware</h2>
 
-<ol>
-<li><p><em>A Micro-SD card</em> (formal name TF card) less than 2G if your board is mounted with  MX233CAG4B.
+<ul>
+<li><p><strong>A Micro-SD card</strong> (formal name TF card) less than 2G if your board is mounted with  MX233CAG4B.
 Or any capacity of card if MX233CAG4C.</p></li>
-<li><p><em>A SD card reader</em> normally comes with a USB port. Or a SD card converter suit (micro to normal size) if your notebook computer has a SD/MMC card socket.</p></li>
-</ol>
+<li><p><strong>A SD card reader</strong> normally comes with a USB port. Or a SD card converter suit (micro to normal size) if your notebook computer has a SD/MMC card socket.</p></li>
+</ul>
 
 
-<p>For further debug, you also need following devices.</p>
+<p><em>For further debug, you also need following devices</em></p>
 
-<ol>
+<ul>
 <li>A USB-Serial converter wire.</li>
-</ol>
+</ul>
 
 
-<p>Note that openboard only support CMOS (3.3V) signal with its Debug UART port.
-FYR, I use a cp1202 as the converter.</p>
+<p><em>Note that openboard only support CMOS (3.3V) signal with its Debug UART port</em></p>
 
-<ol>
+<p>FYR, I use a cp1202 as the converter.</p>
+
+<ul>
 <li>And of course, an openboard of h/w ver. pegasus.</li>
-</ol>
+</ul>
 
 
 <h2>Step 2: Make partition on your sd card</h2>
@@ -131,17 +132,17 @@ FYR, I use a cp1202 as the converter.</p>
 <p>Normally you will find some new device node appears in your /dev directory.
 They have different name base on your sd reader types, such as /dev/sdb, /dev/mmc0p1.</p>
 
-<ol>
+<ul>
 <li><p>Switch to root or use sudo in debian/ubuntu.</p></li>
 <li><p>Run fdisk</p></li>
-</ol>
+</ul>
 
 
 <p><code>sudo fdisk /dev/sdb</code></p>
 
-<ol>
+<ul>
 <li>Delete all old partitions. <strong>CAUTION</strong> All data on your sd card will lost.</li>
-</ol>
+</ul>
 
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -165,9 +166,251 @@ They have different name base on your sd reader types, such as /dev/sdb, /dev/mm
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p><a href="http://orsonzhai.github.com">my github host</a></p>
+<ul>
+<li>Create new partition 1 on sd card</li>
+</ul>
 
-<p><img src="/images/tree-bear.jpg" alt="anythin" /></p>
+
+<p>Partition 1 is used to store Linux kernel.</p>
+
+<p>Niuboot currently load kernel from sd offset 0x100000 ( fixed for now, will be changed later ).</p>
+
+<p>So you must create partition 1 from sector 2048 ( also the default value of fdisk ).</p>
+
+<p>The size of partition 1 should be larger than 4MB which is the normal size of kernel image.</p>
+
+<p>The partition type choose to be 0x41 which means there is no filesystem but a flat boot area for Openboard.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Command <span class="o">(</span>m <span class="k">for </span><span class="nb">help</span><span class="o">)</span>: p
+</span><span class='line'>
+</span><span class='line'>Device Boot      Start         End      Blocks   Id  System
+</span><span class='line'>
+</span><span class='line'>Command <span class="o">(</span>m <span class="k">for </span><span class="nb">help</span><span class="o">)</span>: n
+</span><span class='line'>Partition <span class="nb">type</span>:
+</span><span class='line'>p   primary <span class="o">(</span>0 primary, 0 extended, 4 free<span class="o">)</span>
+</span><span class='line'>e   extended
+</span><span class='line'>Select <span class="o">(</span>default p<span class="o">)</span>: p
+</span><span class='line'>Partition number <span class="o">(</span>1-4, default 1<span class="o">)</span>: 1
+</span><span class='line'>First sector <span class="o">(</span>2048-7744511, default 2048<span class="o">)</span>: 2048
+</span><span class='line'>Last sector, +sectors or +size<span class="o">{</span>K,M,G<span class="o">}</span> <span class="o">(</span>2048-7744511, default 7744511<span class="o">)</span>: +8M
+</span><span class='line'>
+</span><span class='line'>Command <span class="o">(</span>m <span class="k">for </span><span class="nb">help</span><span class="o">)</span>: t
+</span><span class='line'>Selected partition 1
+</span><span class='line'>Hex code <span class="o">(</span><span class="nb">type </span>L to list codes<span class="o">)</span>: 41
+</span><span class='line'>Changed system <span class="nb">type </span>of partition 1 to 41 <span class="o">(</span>PPC PReP Boot<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Create partition 2 for rootfs</li>
+</ul>
+
+
+<p>The size of this partition bases on how big file system you want to use.
+There are options from 4MB ~ 500MB.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Command <span class="o">(</span>m <span class="k">for </span><span class="nb">help</span><span class="o">)</span>: n
+</span><span class='line'>Partition <span class="nb">type</span>:
+</span><span class='line'>p   primary <span class="o">(</span>1 primary, 0 extended, 3 free<span class="o">)</span>
+</span><span class='line'>e   extended
+</span><span class='line'>Select <span class="o">(</span>default p<span class="o">)</span>: p
+</span><span class='line'>Partition number <span class="o">(</span>1-4, default 2<span class="o">)</span>: 2
+</span><span class='line'>First sector <span class="o">(</span>18432-7744511, default 18432<span class="o">)</span>:
+</span><span class='line'>Using default value 18432
+</span><span class='line'>Last sector, +sectors or +size<span class="o">{</span>K,M,G<span class="o">}</span> <span class="o">(</span>18432-7744511, default 7744511<span class="o">)</span>: +1G
+</span><span class='line'>
+</span><span class='line'>Command <span class="o">(</span>m <span class="k">for </span><span class="nb">help</span><span class="o">)</span>: p
+</span><span class='line'>
+</span><span class='line'>Device Boot      Start      End        Blocks   Id  System
+</span><span class='line'>/dev/sdb1        2048       18431      8192     41  PPC PReP Boot
+</span><span class='line'>/dev/sdb2        18432      2115583    1048576  83  Linux
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Write new partition table to SD card</li>
+</ul>
+
+
+<p>After operation, you may need to re-plug the sd card for update.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Command <span class="o">(</span>m <span class="k">for </span><span class="nb">help</span><span class="o">)</span>: w
+</span><span class='line'>The partition table has been altered!
+</span><span class='line'>root<span class="err">$</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Step 3: Burn Niuboot, kernel and rootfs to SD card</h2>
+
+<p>Images files was located in <a href="https://github.com/openbrd/pegasus/tree/master/images">https://github.com/openbrd/pegasus/</a>
+Download them or <code>git clone git@github.com:openbrd/pegasus.git</code></p>
+
+<p>Assume your SD card was identified as /dev/sdb and 2 partitions as sdb1/sdb2</p>
+
+<ul>
+<li>Write Niuboot after MBR</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>root<span class="nv">$ </span><span class="nb">cd </span>pegasus/images/
+</span><span class='line'>root<span class="nv">$ </span>dd <span class="k">if</span><span class="o">=</span>niuboot.bin <span class="nv">of</span><span class="o">=</span>/dev/sdb <span class="nv">ibs</span><span class="o">=</span>512 <span class="nv">seek</span><span class="o">=</span>1
+</span><span class='line'>root<span class="nv">$ </span><span class="nb">cd</span> ../tools/
+</span><span class='line'>root<span class="nv">$ </span>./make_bootable_sd.pl /dev/sdb
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Write kernel to partition 1</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>root<span class="nv">$ </span><span class="nb">cd </span>pegasus/images/
+</span><span class='line'>root<span class="nv">$ </span>dd <span class="k">if</span><span class="o">=</span>zImage <span class="nv">of</span><span class="o">=</span>/dev/sdb1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Extract rootfs to partition 2</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>root<span class="nv">$ </span><span class="nb">cd </span>pegasus/images/
+</span><span class='line'>root<span class="nv">$ </span>mkfs.ext2 /dev/sdb2
+</span><span class='line'>root<span class="nv">$ </span>mount /dev/sdb2 /mnt
+</span><span class='line'>root<span class="nv">$ </span>tar xfzv rootfs.tgz -C /mnt
+</span><span class='line'>root<span class="nv">$ </span>umount /mnt
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Step 4: Boot up Openboard with your SD card</h2>
+
+<ul>
+<li><p>Insert SD card into Openboard and set the boot mode as SD/MMC-1.</p></li>
+<li><p>Connect USB-Serial Wire to your computer and open a termial for it.
+For my example <code>picocom --omap delbs -b 115200 -f n /dev/ttyUSB0</code></p></li>
+<li><p>Power up your Openboard</p></li>
+</ul>
+
+
+<p>If everything is OK, you will see following.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>INIT:
+</span><span class='line'>&lt;..uart..&gt;
+</span><span class='line'>INIT: sdram...
+</span><span class='line'>INIT: sd card...
+</span><span class='line'>INIT: dm9k...
+</span><span class='line'>INIT: tag-list...
+</span><span class='line'>INIT: booting...
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>--NiuBoot v0.91--
+</span><span class='line'><span class="o">(</span>C<span class="o">)</span> Openboard. 2011-2014
+</span><span class='line'>Distributed Under GPLv3
+</span><span class='line'>
+</span><span class='line'>NIUBOOT# probe
+</span><span class='line'>
+</span><span class='line'>SD TYPE: Micro
+</span><span class='line'>SERIAL <span class="c">#: 0x34000920</span>
+</span><span class='line'>SD max speed: 0x32 <span class="o">(</span><span class="nv">32</span><span class="o">=</span>20MHz,5A<span class="o">=</span>50MHz<span class="o">)</span>
+</span><span class='line'>max block size: 0x200 bytes
+</span><span class='line'>total blocks 0x79400 <span class="o">(</span>0xF2 MB<span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>NIUBOOT# <span class="nb">read </span>100000 400000 40008000
+</span><span class='line'>
+</span><span class='line'><span class="nb">read </span>0x400000 bytes
+</span><span class='line'>
+</span><span class='line'>NIUBOOT#
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Niuboot will automatically read 4MB kernel image from 0x100000 into DDR 0x40008000
+You may use <code>* 40000000 100</code> to check the memmory.</p>
+
+<ul>
+<li>Loading kernel if you have no more interest in Niuboot :)</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>NIUBOOT# go 40008000 40000000 a45
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Waiting to see kernel booting until shell login appears.</p>
+
+<p><strong>GOOD LUCK!</strong></p>
 </div>
 
 
