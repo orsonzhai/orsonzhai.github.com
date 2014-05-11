@@ -4,7 +4,7 @@
   <title><![CDATA[Dream Eyes]]></title>
   <link href="http://orsonzhai.github.com/atom.xml" rel="self"/>
   <link href="http://orsonzhai.github.com/"/>
-  <updated>2014-05-11T22:54:47+08:00</updated>
+  <updated>2014-05-11T23:12:57+08:00</updated>
   <id>http://orsonzhai.github.com/</id>
   <author>
     <name><![CDATA[Orson Zhai]]></name>
@@ -56,10 +56,37 @@ FYR, I use a cp1202 as the converter.</p>
 They have different name base on your sd reader types, such as /dev/sdb, /dev/mmc0p1.</p>
 
 <ol>
-<li><p>Switch to root or use sudo in debian/ubuntu.</p>
-
-<p> <code>sudo fdisk /dev/sdb</code></p></li>
+<li><p>Switch to root or use sudo in debian/ubuntu.</p></li>
+<li><p>Run fdisk</p></li>
 </ol>
+
+
+<p><code>sudo fdisk /dev/sdb</code></p>
+
+<ol>
+<li>Delete all old partitions. <strong>CAUTION</strong> All data on your sd card will lost.</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Command <span class="o">(</span>m <span class="k">for </span><span class="nb">help</span><span class="o">)</span>: p
+</span><span class='line'>
+</span><span class='line'>Device Boot      Start         End      Blocks   Id  System
+</span><span class='line'>/dev/sdb1            2048       10239        4096   41  PPC PReP Boot
+</span><span class='line'>/dev/sdb2           10240     2107391     1048576   83  Linux
+</span><span class='line'>/dev/sdb3         2107392     4204543     1048576   83  Linux
+</span><span class='line'>
+</span><span class='line'>Command <span class="o">(</span>m <span class="k">for </span><span class="nb">help</span><span class="o">)</span>: d
+</span><span class='line'>Partition number <span class="o">(</span>1-4<span class="o">)</span>: 3
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p><a href="http://orsonzhai.github.com">my github host</a></p>
