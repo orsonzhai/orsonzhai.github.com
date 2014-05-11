@@ -4,7 +4,7 @@
   <title><![CDATA[Dream Eyes]]></title>
   <link href="http://orsonzhai.github.com/atom.xml" rel="self"/>
   <link href="http://orsonzhai.github.com/"/>
-  <updated>2014-05-11T22:48:55+08:00</updated>
+  <updated>2014-05-11T22:54:47+08:00</updated>
   <id>http://orsonzhai.github.com/</id>
   <author>
     <name><![CDATA[Orson Zhai]]></name>
@@ -58,7 +58,7 @@ They have different name base on your sd reader types, such as /dev/sdb, /dev/mm
 <ol>
 <li><p>Switch to root or use sudo in debian/ubuntu.</p>
 
-<p> sudo fdisk /dev/sdb</p></li>
+<p> <code>sudo fdisk /dev/sdb</code></p></li>
 </ol>
 
 
