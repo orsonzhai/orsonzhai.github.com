@@ -1,16 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
+  <title><![CDATA[Dream Eyes]]></title>
   <link href="http://orsonzhai.github.com/atom.xml" rel="self"/>
   <link href="http://orsonzhai.github.com/"/>
-  <updated>2013-03-21T15:43:04+08:00</updated>
+  <updated>2014-05-11T16:05:24+08:00</updated>
   <id>http://orsonzhai.github.com/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[Orson Zhai]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Open the world: history of nerd programmers]]></title>
+    <link href="http://orsonzhai.github.com/blog/2013/03/21/open-the-world-history-of-nerd-programmers/"/>
+    <updated>2013-03-21T16:50:00+08:00</updated>
+    <id>http://orsonzhai.github.com/blog/2013/03/21/open-the-world-history-of-nerd-programmers</id>
+    <content type="html"><![CDATA[<h2>About me</h2>
+
+<p>When someone asks me about my job, I always tell them I am a programmer not &#8220;software engineer&#8221; or &#8220;developer&#8221;.
+Most of them think I am a nerd who is writing code every day and night.
+((当有人问我是什么职业的时候，我经常回答他们我是一个程序员))</p>
+
+<p><a href="http://orsonzhai.github.com">my github host</a></p>
+
+<p><img src="http://orsonzhai.github.com/images/tree-bear.jpg" alt="anythin" /></p>
+]]></content>
+  </entry>
   
 </feed>
