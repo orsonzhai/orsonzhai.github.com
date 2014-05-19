@@ -4,7 +4,7 @@
   <title><![CDATA[Dream Eyes]]></title>
   <link href="http://orsonzhai.github.com/atom.xml" rel="self"/>
   <link href="http://orsonzhai.github.com/"/>
-  <updated>2014-05-12T01:04:32+08:00</updated>
+  <updated>2014-05-20T07:27:30+08:00</updated>
   <id>http://orsonzhai.github.com/</id>
   <author>
     <name><![CDATA[Orson Zhai]]></name>
@@ -12,6 +12,71 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Layout Bugs of Pegasus]]></title>
+    <link href="http://orsonzhai.github.com/blog/2014/05/19/layout-bugs-of-pegasus/"/>
+    <updated>2014-05-19T11:12:00+08:00</updated>
+    <id>http://orsonzhai.github.com/blog/2014/05/19/layout-bugs-of-pegasus</id>
+    <content type="html"><![CDATA[<h2>Layout Bug Report</h2>
+
+<p>After about 2 months testing, Openboard Pegasus has been found with some pcb layout bugs.
+I&#8217;ll list them here for people who will fix them at next board release.</p>
+
+<h3>BUG 1: Micro USB connector pinout reversed</h3>
+
+<p><em>Severity</em> <strong>HIGH</strong>
+<em>Description</em></p>
+
+<p>Micro USB pin-out: 1.Vss 2.D- 3.D+ 4.ID 5.GND
+Look from the front of micro-A socket, left to right is responding 1 to 5.
+But now it is layout as left is 5 and right is 1.</p>
+
+<h3>BUG 2: LCD_RS pin does not be pulled up</h3>
+
+<p><em>Severity</em> <strong>HIGH</strong>
+<em>Description</em></p>
+
+<p>LCD_RS will be detected at startup of SoC.
+A pull-up indicates SoC will get booting mode from switch button.</p>
+
+<h3>BUG 3: SVIDIO output reversed signal pin and ground</h3>
+
+<p><em>Severity</em> <strong>MEDIUM</strong>
+<em>Description</em></p>
+
+<p>S-Vidio signal will be wrapped by groud.</p>
+
+<h3>BUG 4: Head-phone output shorted right channel to ground</h3>
+
+<p><em>Severity</em> <strong>MEDIUM</strong>
+<em>Description</em></p>
+
+<p>Headphone audio output has a seperate ground.</p>
+
+<h3>BUG 5: Head-phone output right channel is shorted to ground</h3>
+
+<p><em>Severity</em> <strong>MEDIUM</strong>
+<em>Description</em></p>
+
+<p>User will get error report from right channel.</p>
+
+<h3>BUG 6: DM9K pin 21 should be pulled up</h3>
+
+<p><em>Severity</em> <strong>MEDIUM</strong>
+<em>Description</em></p>
+
+<p>Pulling high this pin set DM9k work in 8 bit mode.
+The GPMI only supports 8 bit width in this version.</p>
+
+<h3>BUG 7: The beep has no power supply</h3>
+
+<p><em>Severity</em> <strong>LOW</strong>
+<em>Description</em></p>
+
+<p>The beep will not beeping.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Make bootable SD card for OpenBoard Pegasus v4]]></title>

@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Open the world: history of nerd programmers - Dream Eyes</title>
+  <title>Layout Bugs of Pegasus - Dream Eyes</title>
   <meta name="author" content="Orson Zhai">
 
   
-  <meta name="description" content="About me When someone asks me about my job, I always tell them I am a programmer not &#8220;software engineer&#8221; or &#8220;developer&#8221;.
-Most &hellip;">
+  <meta name="description" content="Layout Bug Report After about 2 months testing, Openboard Pegasus has been found with some pcb layout bugs.
+I&#8217;ll list them here for people who &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@ Most &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://orsonzhai.github.com/blog/2013/03/21/open-the-world-history-of-nerd-programmers">
+  <link rel="canonical" href="http://orsonzhai.github.com/blog/2014/05/19/layout-bugs-of-pegasus">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Dream Eyes" type="application/atom+xml">
@@ -69,7 +69,7 @@ Most &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Open the World: History of Nerd Programmers</h1>
+      <h1 class="entry-title">Layout Bugs of Pegasus</h1>
     
     
       <p class="meta">
@@ -85,7 +85,7 @@ Most &hellip;">
   
 
 
-<time datetime="2013-03-21T16:50:00+08:00" pubdate data-updated="true">Mar 21<span>st</span>, 2013</time>
+<time datetime="2014-05-19T11:12:00+08:00" pubdate data-updated="true">May 19<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -94,15 +94,63 @@ Most &hellip;">
   </header>
 
 
-<div class="entry-content"><h2>About me</h2>
+<div class="entry-content"><h2>Layout Bug Report</h2>
 
-<p>When someone asks me about my job, I always tell them I am a programmer not &#8220;software engineer&#8221; or &#8220;developer&#8221;.
-Most of them think I am a nerd who is writing code every day and night.
-((当有人问我是什么职业的时候，我经常回答他们我是一个程序员))</p>
+<p>After about 2 months testing, Openboard Pegasus has been found with some pcb layout bugs.
+I&#8217;ll list them here for people who will fix them at next board release.</p>
 
-<p><a href="http://orsonzhai.github.com">my github host</a></p>
+<h3>BUG 1: Micro USB connector pinout reversed</h3>
 
-<p><img src="/images/tree-bear.jpg" alt="anythin" /></p>
+<p><em>Severity</em> <strong>HIGH</strong>
+<em>Description</em></p>
+
+<p>Micro USB pin-out: 1.Vss 2.D- 3.D+ 4.ID 5.GND
+Look from the front of micro-A socket, left to right is responding 1 to 5.
+But now it is layout as left is 5 and right is 1.</p>
+
+<h3>BUG 2: LCD_RS pin does not be pulled up</h3>
+
+<p><em>Severity</em> <strong>HIGH</strong>
+<em>Description</em></p>
+
+<p>LCD_RS will be detected at startup of SoC.
+A pull-up indicates SoC will get booting mode from switch button.</p>
+
+<h3>BUG 3: SVIDIO output reversed signal pin and ground</h3>
+
+<p><em>Severity</em> <strong>MEDIUM</strong>
+<em>Description</em></p>
+
+<p>S-Vidio signal will be wrapped by groud.</p>
+
+<h3>BUG 4: Head-phone output shorted right channel to ground</h3>
+
+<p><em>Severity</em> <strong>MEDIUM</strong>
+<em>Description</em></p>
+
+<p>Headphone audio output has a seperate ground.</p>
+
+<h3>BUG 5: Head-phone output right channel is shorted to ground</h3>
+
+<p><em>Severity</em> <strong>MEDIUM</strong>
+<em>Description</em></p>
+
+<p>User will get error report from right channel.</p>
+
+<h3>BUG 6: DM9K pin 21 should be pulled up</h3>
+
+<p><em>Severity</em> <strong>MEDIUM</strong>
+<em>Description</em></p>
+
+<p>Pulling high this pin set DM9k work in 8 bit mode.
+The GPMI only supports 8 bit width in this version.</p>
+
+<h3>BUG 7: The beep has no power supply</h3>
+
+<p><em>Severity</em> <strong>LOW</strong>
+<em>Description</em></p>
+
+<p>The beep will not beeping.</p>
 </div>
 
 
@@ -125,7 +173,7 @@ Most of them think I am a nerd who is writing code every day and night.
   
 
 
-<time datetime="2013-03-21T16:50:00+08:00" pubdate data-updated="true">Mar 21<span>st</span>, 2013</time>
+<time datetime="2014-05-19T11:12:00+08:00" pubdate data-updated="true">May 19<span>th</span>, 2014</time>
       
 
 
@@ -140,8 +188,8 @@ Most of them think I am a nerd who is writing code every day and night.
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/2014/05/11/make-bootable-sd-card-for-openboard-pegasus-v4/" title="Previous Post: Make bootable SD card for OpenBoard Pegasus v4">&laquo; Make bootable SD card for OpenBoard Pegasus v4</a>
       
-        <a class="basic-alignment right" href="/blog/2014/05/11/make-bootable-sd-card-for-openboard-pegasus-v4/" title="Next Post: Make bootable SD card for OpenBoard Pegasus v4">Make bootable SD card for OpenBoard Pegasus v4 &raquo;</a>
       
     </p>
   </footer>
@@ -199,8 +247,8 @@ Most of them think I am a nerd who is writing code every day and night.
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://orsonzhai.github.com/blog/2013/03/21/open-the-world-history-of-nerd-programmers/';
-        var disqus_url = 'http://orsonzhai.github.com/blog/2013/03/21/open-the-world-history-of-nerd-programmers/';
+        var disqus_identifier = 'http://orsonzhai.github.com/blog/2014/05/19/layout-bugs-of-pegasus/';
+        var disqus_url = 'http://orsonzhai.github.com/blog/2014/05/19/layout-bugs-of-pegasus/';
         var disqus_script = 'embed.js';
       
     (function () {
